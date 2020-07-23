@@ -10,7 +10,6 @@ static char *convert_string(int n)
     return str;
 }
 
-
 static char *rem_lead_zero(char *ch)
 {
     while (*ch && *ch == '0')
@@ -23,7 +22,6 @@ static char *rem_lead_zero(char *ch)
     return ch_;
 }
 
-
 static int max(int a, int b)
 {
     if (a > b)
@@ -32,8 +30,6 @@ static int max(int a, int b)
     }
     return b;
 }
-
-
 
 static int min(int a, int b)
 {
@@ -44,7 +40,6 @@ static int min(int a, int b)
 
 char *intal_add(const char *intal1, const char *intal2)
 {
-    // printf("hi\n");
     int carry = 0;
     int l1 = strlen(intal1);
     int l2 = strlen(intal2);
@@ -86,8 +81,6 @@ char *intal_add(const char *intal1, const char *intal2)
     }
     return str;
 }
-
-
 
 int intal_compare(const char *intal1, const char *intal2)
 {
@@ -166,7 +159,7 @@ int intal_search(char **arr, int n, const char *key)
     return search;
 }
 
-char *intal_diff(const char *intal1, const char *intal2) //remove leading 0s, sometimes it comes in mod and divide code
+char *intal_diff(const char *intal1, const char *intal2)
 {
 
     if (intal_compare(intal1, intal2) == 0)
@@ -203,8 +196,6 @@ char *intal_diff(const char *intal1, const char *intal2) //remove leading 0s, so
         for (int i = 0; i < strlen(intal2); i++)
             num1[i] = intal2[i] - '0';
     }
-    // char c;
-    // char *res;
     for (int i = max_len - 1; i >= 0; i--)
     {
         if (num1[i] < num2[i])
@@ -249,7 +240,6 @@ char *intal_diff(const char *intal1, const char *intal2) //remove leading 0s, so
     free(total);
     return temp;
 }
-
 
 /*
 char *intal_diff(const char *intal1, const char *intal2)
@@ -367,9 +357,7 @@ char *intal_multiply(const char *intal1, const char *intal2)
     int c = 0;
     for (; i >= 0; i--)
     {
-        int carry = total[i] + '0'; //some ' ' values are there at the start of strings. See why and try to remove this if statement
-                                    // if (carry == '1' || carry == '2' || carry == '4' || carry == '3' || carry == '5' || carry == '6' || carry == '7' || carry == '8' || carry == '9' || carry == '0')
-        // strncat(sum, &carry, 1);
+        int carry = total[i] + '0';
         sum[c++] = carry;
     }
 
@@ -390,7 +378,6 @@ char *intal_multiply(const char *intal1, const char *intal2)
     return sum;
 }
 
-//DIFF BETWEEN STRLEN AND SIZEOF
 /*
 char *intal_mod(const char *intal1, const char *intal2)         //fix binary division and long division for quotient
 {
@@ -525,7 +512,6 @@ char *intal_mod(const char *intal1, const char *intal2)         //fix binary div
 
 char *intal_divide(const char *intal1, const char *intal2)
 {
-    // printf("hi\n");
     char *dividend = (char *)calloc(strlen(intal1) + 1, sizeof(char));
     char *sum = (char *)calloc(strlen(intal1) + 1, sizeof(char));
     char *remainder = (char *)calloc(strlen(intal1) + 1, sizeof(char));
@@ -539,7 +525,6 @@ char *intal_divide(const char *intal1, const char *intal2)
         free(remainder);
         return res;
     }
-    // printf("hi\n");
 
     if (strcmp(intal1, intal2) == 0)
     {
@@ -562,188 +547,152 @@ char *intal_divide(const char *intal1, const char *intal2)
     int flag = 0;
     while (1)
     {
-     while (intal_compare(dividend, intal2) == -1)
+        while (intal_compare(dividend, intal2) == -1)
 
         {
-                if (i == intal1_len)
-   
+            if (i == intal1_len)
+
             {
-                      dividend = rem_lead_zero(dividend);
-                      int len = strlen(dividend);
-                        char *r = (char *)malloc(sizeof(char) * (len + 1));
+                dividend = rem_lead_zero(dividend);
+                int len = strlen(dividend);
+                char *r = (char *)malloc(sizeof(char) * (len + 1));
 
-                        strcpy(r, dividend);
+                strcpy(r, dividend);
 
-                        free(dividend);
-                        free(remainder);
-                        if (yes)
-       
+                free(dividend);
+                free(remainder);
+                if (yes)
+
                 {
-                              char c = '0';
-                              // printf("sum1 is %c div %s %s\n", c, dividend, intal2);
+                    char c = '0';
 
-          strncat(sum, &c, 1);
-                           
+                    strncat(sum, &c, 1);
                 }
-                        // printf("here1 ");
-        return sum;
-                     
+                return sum;
             }
 
-                  if (flag)
-     
+            if (flag)
+
             {
-                        int y2 = 0;
-                        int copy = i;
-                        for (; i < copy + strlen(intal2); i++)
-       
+                int y2 = 0;
+                int copy = i;
+                for (; i < copy + strlen(intal2); i++)
+
                 {
-                              if (i < strlen(intal1))
-         
+                    if (i < strlen(intal1))
+
                     {
-                                    strncat(dividend, &intal1[i], 1);
-                                    if (y2)
-           
+                        strncat(dividend, &intal1[i], 1);
+                        if (y2)
+
                         {
-                                          char c = '0';
-                                          // printf("sum2 is %c div %s %s\n", c, dividend, intal2);
-              strncat(sum, &c, 1);
-                                       
+                            char c = '0';
+
+                            strncat(sum, &c, 1);
                         }
-                                    else            
+                        else
                         {
-                                          y2 = 1;
-                                       
+                            y2 = 1;
                         }
-                                    
-         
                     }
-                              else          
+                    else
                     {
-                                    char c = '0';
-                                      // printf("sum2 is %c div %s %s\n", c, dividend, intal2);
-              strncat(sum, &c, 1);
-                                    strcpy(remainder, dividend);
-                                    // break;
-            // printf("here2\n");
-            return sum;
-                                 
+                        char c = '0';
+
+                        strncat(sum, &c, 1);
+                        strcpy(remainder, dividend);
+
+                        return sum;
                     }
-                           
                 }
-                        flag = 0;
-                     
+                flag = 0;
             }
-                  else      
+            else
             {
-                        // printf("6 \n");
-        strncat(dividend, &intal1[i++], 1);
-                        if (yes)
-       
-                {
-                              char c = '0';
-                              // printf("sum3 is %c div %s %s\n", c, dividend, intal2);
+                strncat(dividend, &intal1[i++], 1);
+                if (yes)
 
-          strncat(sum, &c, 1);
-                           
-                }
-                        yes = 1;
-                        len1--;
-                     
-            }
-               
-        }
-            yes = 0;
-            if (intal_compare(dividend, intal2) != 0) //== 1)
-   
-        {
-                  // printf("712 ");
-      char *str;
-                  dividend = rem_lead_zero(dividend);
-                  for (int po = 1; po <= 10; po++)
-     
-            {
-                        int length = snprintf(NULL, 0, "%d", po);
-                        str = malloc(length + 1);
-                        snprintf(str, length + 1, "%d", po);
-                        // printf("%c ", 'f');
-        if (intal_compare(intal_multiply(str, intal2), dividend) > 0)
-       
                 {
-                              // printf("%d ", po);
-          po = po - 1;
-                              char c = po + '0';
-                              strncat(sum, &c, 1);
-                              // printf("sum4 is %c div %s %s\n", c, dividend, intal2);
-          // free(str);
-          break;
-                           
-                }
-                        else        
-                {
-                              // printf("divisor:%s  dividend:%s\n", intal_multiply(str, intal2), dividend);
-       
-                }
-                     
-            }
-                  dividend = rem_lead_zero(dividend);
-                  // printf("%s ", dividend);
-      char *diff1 = intal_diff(str, "1");
-                  char *mul1 = intal_multiply(intal2, diff1);
-                  char *temp_sub = intal_diff(dividend, mul1);
-                  free(diff1);
-                  free(mul1);
-                  strcpy(remainder, temp_sub);
-                  free(temp_sub);
-                  free(str);
-                  strcpy(dividend, remainder);
-               
-        }
-            else // if(intal_compare(dividend, intal2) == 0)
-   
-        {
-                  // printf("9 \n");
-      flag = 1;
-                  char c = '1';
-                  // printf("sum5 is %c div %s %s\n", c, dividend, intal2);
+                    char c = '0';
 
-      strncat(sum, &c, 1);
-                  memset(dividend, 0, intal1_len + 1); //when to use memeset
-                  if (i == intal1_len)
-     
-            {
-                        char *res = (char *)malloc(sizeof(char) * 2);
-                        res[0] = '0';
-                        res[1] = '\0';
-                        // printf("here3\n");
-        return sum;
-                     
+                    strncat(sum, &c, 1);
+                }
+                yes = 1;
+                len1--;
             }
-               
         }
-         
+        yes = 0;
+        if (intal_compare(dividend, intal2) != 0) 
+
+        {
+            char *str;
+            dividend = rem_lead_zero(dividend);
+            for (int po = 1; po <= 10; po++)
+
+            {
+                int length = snprintf(NULL, 0, "%d", po);
+                str = malloc(length + 1);
+                snprintf(str, length + 1, "%d", po);
+                if (intal_compare(intal_multiply(str, intal2), dividend) > 0)
+
+                {
+                    po = po - 1;
+                    char c = po + '0';
+                    strncat(sum, &c, 1);
+                    break;
+                }
+                else
+                {
+                    // printf("divisor:%s  dividend:%s\n", intal_multiply(str, intal2), dividend);
+                }
+            }
+            dividend = rem_lead_zero(dividend);
+            char *diff1 = intal_diff(str, "1");
+            char *mul1 = intal_multiply(intal2, diff1);
+            char *temp_sub = intal_diff(dividend, mul1);
+            free(diff1);
+            free(mul1);
+            strcpy(remainder, temp_sub);
+            free(temp_sub);
+            free(str);
+            strcpy(dividend, remainder);
+        }
+        else 
+        {
+            flag = 1;
+            char c = '1';
+
+            strncat(sum, &c, 1);
+            memset(dividend, 0, intal1_len + 1); 
+            if (i == intal1_len)
+
+            {
+                char *res = (char *)malloc(sizeof(char) * 2);
+                res[0] = '0';
+                res[1] = '\0';
+                return sum;
+            }
+        }
     }
 
-      // printf("10 \n");
-  free(dividend);
-      int len = strlen(remainder);
-      char *r = (char *)malloc(sizeof(char) * (len + 1));
+    free(dividend);
+    int len = strlen(remainder);
+    char *r = (char *)malloc(sizeof(char) * (len + 1));
 
-      strcpy(r, dividend);
+    strcpy(r, dividend);
 
-      free(remainder);
-      // printf("here success\n");
-  return sum;
+    free(remainder);
+    return sum;
 }
 
 char *intal_mod(const char *intal1, const char *intal2)
 {
-      char *val = intal_divide(intal1, intal2);
-      char *mul = intal_multiply(intal2, val);
-      char *k = intal_diff(intal1, mul);
-      free(mul);
-      free(val);
-      return k;
+    char *val = intal_divide(intal1, intal2);
+    char *mul = intal_multiply(intal2, val);
+    char *k = intal_diff(intal1, mul);
+    free(mul);
+    free(val);
+    return k;
 }
 
 char *intal_pow(const char *intal1, unsigned int n)
